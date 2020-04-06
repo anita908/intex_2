@@ -21,15 +21,9 @@ function Headcontainer(props) {
           <bs.Nav className="mr-auto" >
             <Link to='/home' className='nav-link'>Home</Link>
             <Link to='/about' className='nav-link'>About</Link>
-            <Link to='/help' className='nav-link'>Help</Link>
+            <Link to='/help' className='nav-link'>Prediction Calculator</Link>
           </bs.Nav>
           <bs.Nav>
-            <bs.Nav className="mr-auto pr-4">
-                <Link to="/cart" className="nav-link">
-                    <FontAwesomeIcon icon={faShoppingCart} className="mr-2"/>
-                    {context.cartCount}
-                </Link>
-            </bs.Nav>
             <bs.NavDropdown title="Welcome Anita" alignRight> 
               <bs.NavDropdown.Item href="#action/3.1">My Account</bs.NavDropdown.Item>
               <bs.NavDropdown.Divider />
