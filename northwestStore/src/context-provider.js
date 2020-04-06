@@ -22,6 +22,7 @@ export default class AppProvider extends React.Component {
             cart: {
             },
             cartCount: 0,
+            show: false,
         }
     }
 

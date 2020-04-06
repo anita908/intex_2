@@ -30,6 +30,58 @@ const CheckoutController = props => {
     const total = context.getCartTotal()
     const [stripeError, setStripeError] = React.useState(null)
 
+
+
+    function Show() {
+        context.show = true
+    }
+
+
+    const PaymentForm = props => (
+        <Form>
+            <bs.Container fluid>
+                <bs.Row>
+                    <bs.Col>
+                        <center><h1 className="mt-3">Prediction Calculator</h1></center>
+                    </bs.Col>
+                </bs.Row>
+                <bs.Row>
+                    <bs.Col md='4'>
+                        <Input title="Name:" name="name" type="text" />
+                    </bs.Col>
+    
+                    <bs.Col md='4'>
+                        <Input title="Address1:" name="address1" type="text" />
+                        <center>
+                            <bs.Button
+                            variant="warning"
+                            onClick={Show}
+                            type='submit'>
+                                Make Prediction
+                            </bs.Button>
+                        </center>
+    
+                    </bs.Col>
+                    
+                    <bs.Col md='4'>
+                        <Input title="Address2:" name="address2" type="text" />
+                    </bs.Col>
+                </bs.Row>
+                <bs.Row className={'mt-5'}>
+                    <bs.Col md='4'>
+                    </bs.Col>
+                    <bs.Col md='4'>
+                        <h2>{context.show && <span>#donors & amount per donation</span>} 
+                        {/* {!context.show && <span>dont show</span>} */}
+                        </h2>
+                    </bs.Col>
+                    <bs.Col md='4'>
+                    </bs.Col>
+                </bs.Row>
+            </bs.Container>
+        </Form>
+    )
+
     return (
         <Formik
             initialValues={{
@@ -109,62 +161,7 @@ const CheckoutController = props => {
 /**
  * The form layout/html.
  */
-const PaymentForm = props => (
-    <Form>
-        <bs.Container fluid>
-            <bs.Row>
-                <bs.Col>
-                    <h1 className="mt-3">Checkout</h1>
-                </bs.Col>
-            </bs.Row>
-            <bs.Row className="my-3">
-                <bs.Col md="6">
-                    <bs.Card>
-                        <bs.Card.Header>
-                            <bs.Card.Title>Shipping</bs.Card.Title>
-                        </bs.Card.Header>
-                        <bs.Card.Body>
-                            <Input title="Name:" name="name" type="text" />
-                            <Input title="Address1:" name="address1" type="text" />
-                            <Input title="Address2:" name="address2" type="text" />
-                            <Input title="City:" name="city" type="text" />
-                            <Input title="State:" name="state" type="text" />
-                            <Input title="Zip:" name="zipcode" type="text" />
-                        </bs.Card.Body>
-                    </bs.Card>
-                </bs.Col>
-                <bs.Col md="6">
-                    <bs.Card>
-                        <bs.Card.Header>
-                            <bs.Card.Title>Payment</bs.Card.Title>
-                        </bs.Card.Header>
-                        <bs.Card.Body>
-                            <CardElement />
-                        </bs.Card.Body>
-                    </bs.Card>
 
-                    <div className="mt-4">
-                        Your card will be charged <b>{formatNumber(props.total)}</b>.
-                    </div>
-
-                    <div className="text-center mt-4">
-                        <bs.Button
-                            variant="success"
-                            type="submit"
-                            className="d-inline-flex align-items-center"
-                            disabled={props.form.isSubmitting}
-                        >
-                            {props.form.isSubmitting &&
-                                <bs.Spinner className="mr-2" size="sm" animation="border" />
-                            }
-                            Purchase
-                        </bs.Button>
-                    </div>
-                </bs.Col>
-            </bs.Row>
-        </bs.Container>
-    </Form>
-)
 
 
 /**
