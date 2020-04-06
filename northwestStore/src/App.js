@@ -6,7 +6,6 @@ import Home from './home';
 import About from './about';
 import Help from './help';
 import Leftcontainer from './left_container';
-import Rightcontainer from './right_container';
 import Headcontainer from './head_container';
 import Footer from './footer';
 import ProductDetail from "./ProductDetail"
@@ -28,7 +27,7 @@ function App(props) {
           <bs.Col md='2' className='px-3 py-4  shadow' style={{backgroundColor: 'lightyellow'}}>
             <Leftcontainer />
           </bs.Col>
-          <bs.Col md='8'>
+          <bs.Col md='10'>
             <Switch>
               <Route path='/about'>
                 <About />
@@ -55,9 +54,6 @@ function App(props) {
                 <Home />
               </Route>
             </Switch>
-          </bs.Col>
-          <bs.Col md="2" className='px-3 py-4  shadow' style={{backgroundColor: 'lightyellow'}}>
-            <Rightcontainer />
           </bs.Col>
         </bs.Row>
         <bs.Row className='flex-grow-0 flex-shrink-0 shadow-sm'>
