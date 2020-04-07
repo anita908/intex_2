@@ -42,10 +42,10 @@ const CheckoutController = props => {
             <bs.Container fluid>
                 <bs.Row>
                     <bs.Col>
-                        <center><h1 className="mt-3">Prediction Calculator</h1></center>
+                        <center><h3 className="mt-3">Prediction Calculator</h3></center>
                     </bs.Col>
                 </bs.Row>
-                <bs.Row>
+                <bs.Row className={'mt-3'}>
                     <bs.Col md='4'>
                         <Input title="Name:" name="name" type="text" />
                     </bs.Col>
@@ -53,7 +53,7 @@ const CheckoutController = props => {
                     <bs.Col md='4'>
                         <Input title="Address1:" name="address1" type="text" />
                         <center>
-                            <bs.Button
+                            <bs.Button className={'mt-4'}
                             variant="warning"
                             onClick={Show}
                             type='submit'>
@@ -67,7 +67,7 @@ const CheckoutController = props => {
                         <Input title="Address2:" name="address2" type="text" />
                     </bs.Col>
                 </bs.Row>
-                <bs.Row className={'mt-5'}>
+                <bs.Row className={'mt-5 pt-2'}>
                     <bs.Col md='4'>
                     </bs.Col>
                     <bs.Col md='4'>

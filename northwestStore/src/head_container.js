@@ -21,10 +21,10 @@ function Headcontainer(props) {
           <bs.Nav className="mr-auto" >
             <Link to='/home' className='nav-link'>Home</Link>
             <Link to='/about' className='nav-link'>About</Link>
-            <Link to='/help' className='nav-link'>Prediction Calculator</Link>
+            <Link to='/checkout' className='nav-link'>Prediction Calculator</Link>
           </bs.Nav>
           <bs.Nav>
-            <bs.NavDropdown title="Welcome Anita" alignRight> 
+            <bs.NavDropdown title="Welcome" alignRight> 
               <bs.NavDropdown.Item href="#action/3.1">My Account</bs.NavDropdown.Item>
               <bs.NavDropdown.Divider />
               <bs.NavDropdown.Item href="#action/3.4">Logout</bs.NavDropdown.Item>
