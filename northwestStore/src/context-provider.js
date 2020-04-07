@@ -19,6 +19,7 @@ export default class AppProvider extends React.Component {
         this.state = {
             categories: {},
             products: {},
+            campaigns: {},
             cart: {
             },
             cartCount: 0,
@@ -55,6 +56,17 @@ export default class AppProvider extends React.Component {
 
         this.setState({
            products:pros
+        })
+
+        const respca = await axios.get('http://localhost:8000/api/campaign/')
+        console.log(respca)
+        const cams ={}
+        for (const p of respca.data) {
+            cams[p.id] = p
+        }
+
+        this.setState({
+            campaigns:cams
         })
     }
 
