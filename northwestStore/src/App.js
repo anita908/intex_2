@@ -24,7 +24,9 @@ function App(props) {
           </bs.Col>
         </bs.Row>
         <bs.Row  className='flex-grow-1'>
-          <bs.Col md='2' className='px-3 py-4  shadow' style={{backgroundColor: 'lightyellow'}}>
+          <bs.Col md='2' className='px-3 py-4  shadow' 
+          // style={{backgroundColor: 'lightyellow'}}
+          >
             <Leftcontainer />
           </bs.Col>
           <bs.Col md='10'>
