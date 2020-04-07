@@ -8,7 +8,9 @@ from api.models import Category
 from api.models import Product
 from api.serializers import CategorySerializer
 from api.serializers import ProductSerializer
+from api.serializers import COVIDSerializer
 from api.models import Sale
+from api.models import COVID
 
 import json
 import stripe
@@ -57,22 +59,27 @@ class CategoryDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+
+
+
+
+
 class ProductList(APIView):
-    '''Get all product or create a product'''
+    # '''Get all products or create a product'''
     @csrf_exempt
     def get(self, request, format=None):
-        pros = Product.objects.all()
+        pro = Product.objects.all()
+        if request.query_params.get('category'):
+            pro = pro.filter(category=request.query_params.get('category')) #must search by category ID#
+        if request.query_params.get('filename'):
+            pro = pro.filter(filename__contains=request.query_params.get('filename'))
         if request.query_params.get('name'):
-            pros = pros.filter(name__contains=request.query_params.get('name'))
-        elif request.query_params.get('description'):
-            pros = pros.filter(description__contains=request.query_params.get('description'))
-        elif request.query_params.get('filename'):
-            pros = pros.filter(filename__contains=request.query_params.get('filename'))
-        elif request.query_params.get('price'):
-            pros = pros.filter(price__contains=request.query_params.get('price'))
-        elif request.query_params.get('category'):
-            pros = pros.filter(category__title__contains=request.query_params.get('category'))
-        serializer = ProductSerializer(pros, many=True)
+            pro = pro.filter(name__contains=request.query_params.get('name'))
+        if request.query_params.get('description'):
+            pro = pro.filter(description__contains=request.query_params.get('description'))
+        if request.query_params.get('price'):
+            pro = pro.filter(price__contains=request.query_params.get('price'))
+        serializer = ProductSerializer(pro, many=True)
         return Response(serializer.data)
 
     @csrf_exempt
@@ -84,8 +91,9 @@ class ProductList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+
 class ProductDetail(APIView):
-    '''Work with an individual Product object'''
+    # '''Work with an individual Product object'''
     @csrf_exempt
     def get(self, request, pk, format=None):
         pro = Product.objects.get(id=pk)
@@ -106,6 +114,10 @@ class ProductDetail(APIView):
         pro = Product.objects.get(id=pk)
         pro.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+########################
+###  Sales
 
 class CreateSale(APIView):
     '''Creates a sale, including getting a payment intent from Stripe'''
@@ -132,3 +144,20 @@ class CreateSale(APIView):
             'sale_id': sale.id,    
             'client_secret': sale.payment_intent['client_secret'],
         })
+
+class CampaignList(APIView):
+    '''Get all product or create a product'''
+    @csrf_exempt
+    def get(self, request, format=None):
+        pros = COVID.objects.all()
+        serializer = COVIDSerializer(pros, many=True)
+        return Response(serializer.data)
+
+
+class CampaignDetail(APIView):
+    '''Work with an individual Product object'''
+    @csrf_exempt
+    def get(self, request, pk, format=None):
+        pro = COVID.objects.get(id=pk)
+        serializer = COVIDSerializer(pro)
+        return Response(serializer.data)
