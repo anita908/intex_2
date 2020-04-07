@@ -6,14 +6,23 @@ import * as bs from 'react-bootstrap'
 
 
 function ProductDetail(props) {
-   const match = useRouteMatch("/product/:pid");
+   const match = useRouteMatch("/campaign/:pid");
    const [img_idx, setImgIdx] = React.useState("1")
    const context = React.useContext(AppContext)
-   const product = context.products[match.params.pid]
+   const campaign = context.campaigns[match.params.pid]
    const history = useHistory()
+   let isCharity = true
+   
+   if (context.campaigns.is_charity){
+      isCharity = "Yes" 
+   }
+   else{
+      isCharity = "No" 
+   }
 
+   
 
-   if (!product){
+   if (!campaign){
       return (
          <h1 style={{textAlign: "center", marginTop: "20px"}}>Not Found</h1>
       )
@@ -21,23 +30,28 @@ function ProductDetail(props) {
    else {
       return (
          <div>
-            <div className='float-right mt-5 pt-5' style={{display: 'flex', justifyContent: 'center'}}>
-               <img alt="main" className="border" style= {{height:300, width:300}} src={`/media/products/${product.filename}-${img_idx}.png`}></img>
+            <center className='mt-3'><h2>{campaign.title}</h2></center>
+            <div className='float-right ml-5 pt-5 mr-5' style={{display: 'flex', justifyContent: 'center'}}>
+               <img alt="main" className="border" style= {{height:266, width:400}} src={`${campaign.campaign_image_url}`}></img>
             </div>
-            <div key={product.id}  style={{marginTop: "25px", marginLeft: "10px"}}>
-               <center className='mb-5'><h2>Campaign name here</h2></center>
-               <h4>Raised: ${product.price}</h4>
-               <h4>Goal: $1000.00</h4>
+            
+            <div key={campaign.id}  style={{marginTop: "50px", marginLeft: "50px"}}>
+               <h5>Raised: ${campaign.current_amount}</h5>
+               <h5>Goal: ${campaign.goal}</h5>
+               <h5>Numbers of Donators: {campaign.donators}</h5>
+               <h5>Days Active: {campaign.days_active}</h5>
+               <h5>Name: {campaign.user_first_name} {campaign.user_last_name}</h5>
+               <h5>Numbers of Campaign Hearts: {campaign.campaign_hearts}</h5>
+               <h5>Number Social Share: {campaign.social_share_total}</h5>
+               <h5>City: {campaign.location_city}</h5>
+               <h5>Country: {campaign.location_country}</h5>
+               <h5>Is Charity: {isCharity}</h5>
 
-               <p className='mt-5'>Our Description here however long we want it to be and it will not go behind the picture right??
-                  testing...................................... Okay looks like its good to go. button will use the dataset and go to the go fund me 
-                  webpage</p>
+               <p className='mt-5 mr-5'>Description:{campaign.description}</p>
                <center className='mt-5'>
                   <bs.Button
                     variant="success"
-                    href="https://www.gofundme.com/?utm_source=google&utm_medium=cpc&utm_campaign=GoFundMe_US_EN_Exact_Desktop_C
-                    onvertersVisitors&utm_content=gofundme&utm_term=go%20fund%20me_e_c_ad&gclid=CjwKCAjwpqv0BRABEiwA-TySwdNquxZqQeZI_
-                    mSGrKldDcd4W-C-lCYX0o2-tKRJL_phle9CuuzAtxoCfaMQAvD_BwE"
+                    href={campaign.url}
                   //   onClick={e => {
                   //       context.addToCart(product.id)
                   //       history.push('/cart')
