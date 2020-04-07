@@ -27,12 +27,12 @@ function ProductCard(props) {
                      
                      <bs.Col md="3" key={n.id}>
                         <bs.Card bg="light" style={{ width: '12rem', marginBottom: "2rem"}}>
-                           <bs.Card.Img src={"/media/products/" + n.filename + "-1.png"} style={{paddingTop: '20px', marginTop: "-1.3rem"}}/>
+                           <bs.Card.Img src={"/media/products/" + n.filename + "-1.png"} style={{paddingTop: '20px', marginTop: "1.3rem"}}/>
                            {/* <bs.Card.ImgOverlay>
                               <Link className='btn' to={`/product/${n.id}`}>Details</Link>
                            </bs.Card.ImgOverlay> */}
                            <bs.Card.Header className="text-center">
-                              <bs.Card.Title><Link className='btn' to={`/product/${n.id}`}>{n.name}</Link></bs.Card.Title>
+                              <bs.Card.Title><Link className='btn' to={`/product/${n.id}`}><b>{n.name}</b></Link></bs.Card.Title>
                            </bs.Card.Header>
                         </bs.Card>
                      </bs.Col>
