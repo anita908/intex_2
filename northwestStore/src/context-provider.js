@@ -20,9 +20,9 @@ export default class AppProvider extends React.Component {
             categories: {},
             products: {},
             campaigns: {},
-            cart: {
-            },
-            cartCount: 0,
+            category: {},
+            rows : 0,
+            count: 1,
             show: false,
         }
     }
@@ -37,7 +37,7 @@ export default class AppProvider extends React.Component {
 
     async componentDidMount() {
         const respc = await axios.get('http://localhost:8000/api/category/')
-        console.log(respc)
+        // console.log(respc)
         const cats ={}
         for (const c of respc.data) {
            cats[c.title] = c
@@ -48,12 +48,12 @@ export default class AppProvider extends React.Component {
         })
 
         const respp = await axios.get('http://localhost:8000/api/product/')
-        console.log(respp)
+        // console.log(respp)
         const pros ={}
         for (const p of respp.data) {
             pros[p.id] = p
         }
-
+    
         this.setState({
            products:pros
         })
@@ -81,35 +81,4 @@ export default class AppProvider extends React.Component {
             draft.cartCount = count
         }))
     }
-
-    removeFromCart = pid => {
-        this.setState(produce(this.state, draft => {
-            delete draft.cart[pid]
-
-            let count = 0
-            for (const qty of Object.values(draft.cart)) {
-                count += qty
-            }
-            draft.cartCount = count
-        }))
-    }
-
-    clearCart = () => {
-        this.setState(produce(this.state, draft => {
-            draft.cart = {}
-            draft.cartCount = 0
-        }))
-    }
-
-    getCartTotal = () => {
-        let total = 0.0
-        for (const [pid, qty] of Object.entries(this.state.cart)) {
-            const product = this.state.products[pid]
-            if (product) {
-                total += (qty * product.price)
-            }
-        }
-        return total
-    }
-
 }
