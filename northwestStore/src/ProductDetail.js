@@ -6,64 +6,52 @@ import * as bs from 'react-bootstrap'
 
 
 function ProductDetail(props) {
-   const match = useRouteMatch("/campaign/:pid");
+   const match = useRouteMatch("/product/:pid");
    const [img_idx, setImgIdx] = React.useState("1")
    const context = React.useContext(AppContext)
-   const campaign = context.campaigns[match.params.pid]
+   const product = context.products[match.params.pid]
    const history = useHistory()
-   let isCharity = true
-   
-   if (context.campaigns.is_charity){
-      isCharity = "Yes" 
-   }
-   else{
-      isCharity = "No" 
-   }
 
-   
 
-   if (!campaign){
+   if (!product){
       return (
          <h1 style={{textAlign: "center", marginTop: "20px"}}>Not Found</h1>
       )
    }
    else {
       return (
-         <div>
-            <center className='mt-3'><h2>{campaign.title}</h2></center>
-            <div className='float-right ml-5 pt-5 mr-5' style={{display: 'flex', justifyContent: 'center'}}>
-               <img alt="main" className="border" style= {{height:266, width:400}} src={`${campaign.campaign_image_url}`}></img>
-            </div>
-            
-            <div key={campaign.id}  style={{marginTop: "50px", marginLeft: "50px"}}>
-               <h5>Raised: ${campaign.current_amount}</h5>
-               <h5>Goal: ${campaign.goal}</h5>
-               <h5>Numbers of Donators: {campaign.donators}</h5>
-               <h5>Days Active: {campaign.days_active}</h5>
-               <h5>Name: {campaign.user_first_name} {campaign.user_last_name}</h5>
-               <h5>Numbers of Campaign Hearts: {campaign.campaign_hearts}</h5>
-               <h5>Number Social Share: {campaign.social_share_total}</h5>
-               <h5>City: {campaign.location_city}</h5>
-               <h5>Country: {campaign.location_country}</h5>
-               <h5>Is Charity: {isCharity}</h5>
-
-               <p className='mt-5 mr-5'>Description:{campaign.description}</p>
-               <center className='mt-5'>
-                  <bs.Button
-                    variant="success"
-                    href={campaign.url}
-                  //   onClick={e => {
-                  //       context.addToCart(product.id)
-                  //       history.push('/cart')
-                  //   }}
+         <div className="d-flex flex-row">
+            <div key={product.id}  style={{marginTop: "25px", marginLeft: "10px"}}>
+               <h2>{product.name}</h2>
+               <h3>${product.price}</h3>
+               <p>{product.description}</p>
+               <p className="mt-5">
+                <bs.Button
+                    variant="warning"
+                    onClick={e => {
+                        context.addToCart(product.id)
+                        history.push('/cart')
+                    }}
                      >
-                        Go fund me
+                        Add to Cart
                      </bs.Button>
-               </center><p className="mt-5">
-
                </p>
             </div>
-
+            <div className="float-right" style={{marginTop: "25px", marginLeft: "5px"}}>
+               <img alt="main" className="border" style= {{height:300, width:300}} src={`/media/products/${product.filename}-${img_idx}.png`}></img>
+               <div>
+                  {['1', '2', '3', '4'].map(img_idx =>
+                     (
+                        <img alt="smaller" src={`/media/products/${product.filename}-${img_idx}.png`}
+                        className = "border rounded at at-3 mx-1"
+                        style= {{height:30, width:30}}
+                        onMouseEnter={e=>{
+                           setImgIdx(img_idx)
+                        }}
+                        />
+                     ))}
+               </div>
+            </div>
          </div>
       )
    }
