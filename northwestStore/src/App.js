@@ -37,7 +37,7 @@ function App(props) {
               <Route path='/help'>
                 <Help />
               </Route>
-              <Route path='/product/:pid'>
+              <Route path='/campaign/:pid'>
                 <ProductDetail />
               </Route>
               <Route path="/cart">
