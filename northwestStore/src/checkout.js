@@ -5,7 +5,7 @@ import { Formik, Form, Field} from 'formik'
 import { useHistory } from 'react-router-dom'
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { formatNumber } from './util'
+// import { formatNumber } from './util'
 import AppContext from './context'
 
 
@@ -27,7 +27,6 @@ const CheckoutController = props => {
     const history = useHistory()
     const stripe = useStripe()
     const elements = useElements()
-    const total = context.getCartTotal()
     const [stripeError, setStripeError] = React.useState(null)
 
 
@@ -95,11 +94,11 @@ const CheckoutController = props => {
             validateOnChange={false}
             validateOnBlur={false}
             validate={values => {
-                console.log('validating', values)
+                // console.log('validating', values)
                 return {}
             }}
             onSubmit={async (values, actions) => {
-                console.log('submit', values)
+                // console.log('submit', values)
                 setStripeError(null)
 
                 // create the sale
@@ -121,10 +120,9 @@ const CheckoutController = props => {
                     city: values.city,
                     state: values.state,
                     zipcode: values.zipcode,
-                    total: total,
                     items: items,
                 })
-                console.log(resp.data)
+                // console.log(resp.data)
 
                 // submit the details to stripe
                 const stripeResp = await stripe.confirmCardPayment(resp.data.client_secret, {
@@ -135,7 +133,7 @@ const CheckoutController = props => {
                         },
                     }
                 })
-                console.log(stripeResp)
+                // console.log(stripeResp)
                 actions.setSubmitting(false)
                 if (stripeResp.error) {
                     setStripeError(stripeResp.error.message)
@@ -151,7 +149,7 @@ const CheckoutController = props => {
                 {stripeError &&
                     <div className="mb-3 text-center text-danger">{stripeError}</div>
                 }
-                <PaymentForm form={form} total={total} />
+                <PaymentForm form={form} />
             </>
         )}</Formik>
     )
