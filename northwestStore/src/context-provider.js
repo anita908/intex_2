@@ -58,7 +58,7 @@ export default class AppProvider extends React.Component {
            products:pros
         })
 
-        const respca = await axios.get('http://localhost:8000/api/campaign/')
+        const respca = await axios.get('/api/campaign/')
         console.log(respca)
         const cams ={}
         for (const p of respca.data) {
