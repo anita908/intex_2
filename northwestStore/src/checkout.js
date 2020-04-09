@@ -1,3 +1,4 @@
+import './CSS/todo.css'
 import React from 'react'
 import * as bs from 'react-bootstrap'
 import axios from 'axios'
@@ -29,121 +30,8 @@ const CheckoutController = props => {
     const elements = useElements()
     const [stripeError, setStripeError] = React.useState(null)
 
-
-
-    function Show() {
-        context.show = true
-    }
-
-
-    const PaymentForm = props => (
-        <Form>
-            <bs.Container fluid>
-                <bs.Row>
-                    <bs.Col>
-                        <center><h3 className="mt-3">Prediction Calculator</h3></center>
-                    </bs.Col>
-                </bs.Row>
-                <bs.Row className={'mt-3'}>
-                    <bs.Col md='4'>
-                        <Input title="Name:" name="name" type="text" />
-                    </bs.Col>
-    
-                    <bs.Col md='4'>
-                        <Input title="Address1:" name="address1" type="text" />
-                        <center>
-                            <bs.Button className={'mt-4'}
-                            variant="warning"
-                            onClick={Show}
-                            type='submit'>
-                                Make Prediction
-                            </bs.Button>
-                        </center>
-    
-                    </bs.Col>
-                    
-                    <bs.Col md='4'>
-                        <Input title="Address2:" name="address2" type="text" />
-                    </bs.Col>
-                </bs.Row>
-                <bs.Row className={'mt-5 pt-2'}>
-                    <bs.Col md='4'>
-                    </bs.Col>
-                    <bs.Col md='4'>
-                        <h2>{context.show && <span>#donors & amount per donation</span>} 
-                        {/* {!context.show && <span>dont show</span>} */}
-                        </h2>
-                    </bs.Col>
-                    <bs.Col md='4'>
-                    </bs.Col>
-                </bs.Row>
-            </bs.Container>
-        </Form>
-    )
-
     return (
         <Formik
-            initialValues={{
-                name: 'Conrad Fox',
-                address1: '1234',
-                address2: '5678',
-                city: 'Provo',
-                state: 'UT',
-                zipcode: '84602',
-            }}
-            validateOnChange={false}
-            validateOnBlur={false}
-            validate={values => {
-                // console.log('validating', values)
-                return {}
-            }}
-            onSubmit={async (values, actions) => {
-                // console.log('submit', values)
-                setStripeError(null)
-
-                // create the sale
-                const items = []
-                for (const [pid, qty] of Object.entries(context.cart)) {
-                    const product = context.products[pid]
-                    if (product) {
-                        items.push({
-                            pid: pid,
-                            qty: qty,
-                            price: product.price,
-                        })
-                    }
-                }
-                const resp = await axios.post('http://localhost:8000/api/sale/', {
-                    name: values.name,
-                    address1: values.address1,
-                    address2: values.address2,
-                    city: values.city,
-                    state: values.state,
-                    zipcode: values.zipcode,
-                    items: items,
-                })
-                // console.log(resp.data)
-
-                // submit the details to stripe
-                const stripeResp = await stripe.confirmCardPayment(resp.data.client_secret, {
-                    payment_method: {
-                        card: elements.getElement(CardElement),
-                        billing_details: {
-                            name: values.name,
-                        },
-                    }
-                })
-                // console.log(stripeResp)
-                actions.setSubmitting(false)
-                if (stripeResp.error) {
-                    setStripeError(stripeResp.error.message)
-                    return
-                }
-
-                // clear the cart and forward on
-                context.clearCart()
-                history.push('/receipt')
-            }}
         >{form => (
             <>
                 {stripeError &&
@@ -159,7 +47,65 @@ const CheckoutController = props => {
 /**
  * The form layout/html.
  */
-
+const PaymentForm = props => (
+    <Form>
+        <bs.Container fluid>
+            <bs.Row>
+                <bs.Col>
+                    <h1 className="mt-3">Checkout</h1>
+                </bs.Col>
+            </bs.Row>
+            <bs.Row className="my-3 mt-3">
+                <bs.Col md="3">
+                </bs.Col>
+                <bs.Col md="6">
+                    <bs.Card>
+                        <bs.Card.Body style={{marginLeft: "7rem"}} >
+                            <label>Campaign Goal Amount :</label><br /> <input type="text" placeholder="$" /><br />
+                            <label>Auto facebook post most enabled</label><br />
+                            <select defaultValue="Select --">
+                                <option defaultValue>Select --</option>
+                                <option value="male">True</option>
+                                <option value="female">False</option>
+                            </select><br />
+                            <label>Is it for charity?</label><br />
+                            <select defaultValue="Select --">
+                                <option defaultValue>Select --</option>
+                                <option value="male">True</option>
+                                <option value="female">False</option>
+                            </select><br />
+                            <label>Is the charity validated?</label><br />
+                            <select defaultValue="Select --">
+                                <option defaultValue>Select --</option>
+                                <option value="male">True</option>
+                                <option value="female">False</option>
+                            </select><br />
+                            <label>Is it anonymous?</label><br />
+                            <select defaultValue="Select --">
+                                <option defaultValue>Select --</option>
+                                <option value="male">True</option>
+                                <option value="female">False</option>
+                            </select><br />
+                            <label>Is it visible in the search?</label><br />
+                            <select defaultValue="Select --">
+                                <option defaultValue>Select --</option>
+                                <option value="male">True</option>
+                                <option value="female">False</option>
+                            </select><br />
+                            <label>How many campaign hearts?</label><br /> <input type="text" placeholder="#" /><br />
+                            <label>Write the description of your campaign below:</label><br />
+                            <textarea style={{width: "255px", height: "100px", borderRadius: "5px"}}></textarea>
+                            <br /><br />
+                            <input type="submit" value="Submit" style={{marginLeft: "7rem"}}/>
+                        </bs.Card.Body>
+                    </bs.Card>
+                </bs.Col>
+                <bs.Col md="3">
+                </bs.Col>
+            </bs.Row>
+        </bs.Container>
+    </Form>
+)
 
 
 /**
