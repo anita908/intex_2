@@ -2,12 +2,12 @@ import React from 'react'
 import * as bs from 'react-bootstrap'
 import Logo from './Media/logo.png';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import AppContext from './context'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+// import AppContext from './context'
 
 function Headcontainer(props) {
-  const context = React.useContext(AppContext)
+  // const context = React.useContext(AppContext)
 
    return (
       <bs.Navbar bg="light" expand="lg" >

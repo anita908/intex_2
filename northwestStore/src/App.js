@@ -29,6 +29,8 @@ function App(props) {
           >
             <Leftcontainer />
           </bs.Col>
+        {/* </bs.Row>
+        <bs.Row> */}
           <bs.Col md='10'>
             <Switch>
               <Route path='/about'>

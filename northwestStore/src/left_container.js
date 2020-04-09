@@ -2,29 +2,122 @@ import React from 'react'
 import * as bs from 'react-bootstrap'
 import AppContext from './context'
 import { Link } from 'react-router-dom';
+import Select from 'react-select';
+// const scaryAnimals = [
+//   { label: "Alligators", value: 1 },
+//   { label: "Crocodiles", value: 2 },
+//   { label: "Sharks", value: 3 },
+//   { label: "Small crocodiles", value: 4 },
+//   { label: "Smallest crocodiles", value: 5 },
+//   { label: "Snakes", value: 6 },
+// ];
+
 
 function Left_container(props) {
-
   const context = React.useContext(AppContext)
-  console.log(context)
-  const categories = {}
-  let category = []
-  let productCount = 0
-  for ( let p of Object.values(context.products)) {
-    category.push(p)
-    // categories[p.category] = (categories[p.category] || 0) + 1
-    
-    if (p.category in categories) {
-      categories[p.category] = categories[p.category] + 1
-      productCount = productCount + 1
-    }
-    else {
-      categories[p.category] = 1
-      productCount = productCount + 1
-    }
+  const CampaignList = Object.entries(context.campaigns)
+  const NAME_AR = Object.values(context.campaigns)
+
+  let count = 0
+  let rows =[]
+  for (const p of NAME_AR) {
+    // if (match === null){
+      rows.push(p)
+    // }
   }
+
   return (
-  <bs.Nav className="flex.column">
+    <>
+      Click to apply filters:
+      <br/>
+      <br/>
+      <Link to={`/campaign`}>
+        <bs.Button
+          onClick = {evt => {
+            {Object.values(context.campaigns).map((cam) => (          
+                  (rows = rows.filter(function(Donators){
+                      return Donators.donators > 50}))
+          ))}
+          context.count = 0
+          context.campaigns = rows
+
+          }}>Over 50 donators
+        </bs.Button>
+      </Link>
+      <br/>
+      <br/>
+      <Link to={`/campaign`}>
+        <bs.Button
+          onClick = {evt => {
+            {Object.values(context.campaigns).map((cam) => (          
+                  (rows = rows.filter(function(Donators){
+                      return Donators.current_amount > 5000}))
+          ))}
+          context.campaigns = rows
+          }}>Donations > $5,000
+        </bs.Button>
+      </Link>
+      <br/>
+      <br/>
+      <Link to={`/campaign`}>
+        <bs.Button
+          onClick = {evt => {
+            {Object.values(context.campaigns).map((cam) => (          
+                  (rows = rows.filter(function(Donators){
+                      return Donators.social_share_total > 500}))
+          ))}
+          context.campaigns = rows
+          }}>Share count > 500
+        </bs.Button>
+      </Link>
+      <br/>
+      <br/>
+      <Link to={`/campaign`}>
+        <bs.Button
+          onClick = {evt => {
+            {Object.values(context.campaigns).map((cam) => (          
+                  (rows = rows.filter(function(Donators){
+                      return Donators.campaign_hearts > 200}))
+          ))}
+          context.campaigns = rows
+          }}>Hearts > 200
+        </bs.Button>
+      </Link>
+      <br/>
+      <br/>
+      <Link to={`/campaign`}>
+        <bs.Button
+          onClick = {evt => {
+            {Object.values(context.campaigns).map((cam) => (          
+                  (rows = rows.filter(function(Donators){
+                      return Donators.days_active > 5}))
+          ))}
+          context.campaigns = rows
+          }}>Days Active > 5
+        </bs.Button>
+      </Link>
+      <br/>
+      <br/>
+      <Link to={`/campaign`}>
+        <bs.Button
+          onClick = {evt => {
+            {Object.values(context.campaigns).map((cam) => (          
+                  (rows = rows.filter(function(Donators){
+                      return Donators.goal > 50000}))
+          ))}
+          context.campaigns = rows
+          context.rows = rows.length
+          }}>Goal > $50,000
+        </bs.Button>
+      </Link>
+      <br/>
+      <br/>
+
+
+
+
+
+  {/* <bs.Nav className="flex.column">
     
     <bs.Nav.Item>
     <Link
@@ -45,8 +138,10 @@ function Left_container(props) {
         </Link>
       ))}
     </bs.Nav.Item>
-  </bs.Nav>
+  </bs.Nav> */}
+
+  
+  </>
   )}
    
-
 export default Left_container;

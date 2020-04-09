@@ -1,16 +1,40 @@
 import React from 'react';
-import { useRouteMatch, useHistory } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import AppContext from './context'
 import * as bs from 'react-bootstrap'
 
 
 
 function ProductDetail(props) {
+<<<<<<< HEAD
    const match = useRouteMatch("/product/:pid");
    const [img_idx, setImgIdx] = React.useState("1")
    const context = React.useContext(AppContext)
    const product = context.products[match.params.pid]
    const history = useHistory()
+=======
+   const match = useRouteMatch("/campaign/:pid");
+   const context = React.useContext(AppContext)
+   const campaign = context.campaigns[match.params.pid - 1]
+   // const history = useHistory()
+   let isCharity = true
+   if(context.campaigns.length > 490)
+   {
+      context.count = 0
+   }
+   else
+   {
+      context.count = 1
+   }
+   
+
+   if (context.campaigns.is_charity){
+      isCharity = "Yes" 
+   }
+   else{
+      isCharity = "No" 
+   }
+>>>>>>> ce3d41f7724ccbe38cfbd4f976fef55158d64b5f
 
 
    if (!product){

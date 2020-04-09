@@ -33,17 +33,17 @@ const CheckoutController = props => {
             validateOnBlur={false}
             validate={values => {
                 const errors = {}
-                console.log('validating', values)
+                // console.log('validating', values)
                 return errors
             }}
             onSubmit={async (values, actions) => {
-                console.log('submit', values)
+                // console.log('submit', values)
                 await new Promise(resolve => {
                     setTimeout(() => {  
                         resolve()
                     }, 2000)
                 })
-                console.log('after the 2 seconds')
+                // console.log('after the 2 seconds')
             }}
         >{form => (
             <PaymentForm form={form} total={total} />
