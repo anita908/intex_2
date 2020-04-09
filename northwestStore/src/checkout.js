@@ -52,7 +52,7 @@ const PaymentForm = props => (
         <bs.Container fluid>
             <bs.Row>
                 <bs.Col>
-                    <h1 className="mt-3">Checkout</h1>
+                    <center><h1 className="mt-3">Prediction Calculator</h1></center>
                 </bs.Col>
             </bs.Row>
             <bs.Row className="my-3 mt-3">
