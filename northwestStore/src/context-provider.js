@@ -36,7 +36,7 @@ export default class AppProvider extends React.Component {
     }
 
     async componentDidMount() {
-        const respc = await axios.get('api/category/')
+        const respc = await axios.get('/api/category/')
         // console.log(respc)
         const cats ={}
         for (const c of respc.data) {
@@ -47,7 +47,7 @@ export default class AppProvider extends React.Component {
            categories:cats
         })
 
-        const respp = await axios.get('api/product/')
+        const respp = await axios.get('/api/product/')
         // console.log(respp)
         const pros ={}
         for (const p of respp.data) {
