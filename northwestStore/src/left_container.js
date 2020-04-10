@@ -16,6 +16,7 @@ function Left_container(props) {
   const context = React.useContext(AppContext)
   // const CampaignList = Object.entries(context.campaigns)
   const NAME_AR = Object.values(context.campaigns)
+  const NAME_PR = Object.values(context.cams)
 
   // let count = 0
   let rows =[]
@@ -33,11 +34,10 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-          Object.values(context.campaigns).map((cam) => (          
+          Object.values(context.campaigns).map(() => (          
               (rows = rows.filter(function(Donators){
                       return Donators.donators > 50}))
           ))
-          context.count = 0
           context.campaigns = rows
 
           }}>Over 50 Donors
@@ -48,7 +48,7 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-            Object.values(context.campaigns).map((cam) => (          
+            Object.values(context.campaigns).map(() => (          
                   (rows = rows.filter(function(Donators){
                       return Donators.current_amount > 5000}))
           ))
@@ -61,7 +61,7 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-            Object.values(context.campaigns).map((cam) => (          
+            Object.values(context.campaigns).map(() => (          
                   (rows = rows.filter(function(Donators){
                       return Donators.social_share_total > 500}))
           ))
@@ -74,7 +74,7 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-            Object.values(context.campaigns).map((cam) => (          
+            Object.values(context.campaigns).map(() => (          
                   (rows = rows.filter(function(Donators){
                       return Donators.campaign_hearts > 200}))
           ))
@@ -87,7 +87,7 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-            Object.values(context.campaigns).map((cam) => (          
+            Object.values(context.campaigns).map(() => (          
                   (rows = rows.filter(function(Donators){
                       return Donators.days_active > 5}))
           ))
@@ -100,12 +100,11 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-            Object.values(context.campaigns).map((cam) => (          
+            Object.values(context.campaigns).map(() => (          
                   (rows = rows.filter(function(Donators){
                       return Donators.goal > 50000}))
           ))
           context.campaigns = rows
-          context.rows = rows.length
           }}>Goal > $50,000
         </bs.Button>
       </Link>
@@ -115,6 +114,10 @@ function Left_container(props) {
         <bs.Button
           onClick = {evt => {
           context.campaigns = context.cams
+          rows = []
+          for (const p of NAME_PR) {
+              rows.push(p)
+          }
           }}>Refresh Filters
         </bs.Button>
       </Link>
