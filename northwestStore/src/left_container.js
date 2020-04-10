@@ -2,7 +2,6 @@ import React from 'react'
 import * as bs from 'react-bootstrap'
 import AppContext from './context'
 import { Link } from 'react-router-dom';
-import Select from 'react-select';
 // const scaryAnimals = [
 //   { label: "Alligators", value: 1 },
 //   { label: "Crocodiles", value: 2 },
@@ -15,10 +14,11 @@ import Select from 'react-select';
 
 function Left_container(props) {
   const context = React.useContext(AppContext)
-  const CampaignList = Object.entries(context.campaigns)
+  // const CampaignList = Object.entries(context.campaigns)
   const NAME_AR = Object.values(context.campaigns)
+  const NAME_PR = Object.values(context.cams)
 
-  let count = 0
+  // let count = 0
   let rows =[]
   for (const p of NAME_AR) {
     // if (match === null){
@@ -34,11 +34,10 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-            {Object.values(context.campaigns).map((cam) => (          
-                  (rows = rows.filter(function(Donators){
+          Object.values(context.campaigns).map(() => (          
+              (rows = rows.filter(function(Donators){
                       return Donators.donators > 50}))
-          ))}
-          context.count = 0
+          ))
           context.campaigns = rows
 
           }}>Over 50 Donors
@@ -49,10 +48,10 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-            {Object.values(context.campaigns).map((cam) => (          
+            Object.values(context.campaigns).map(() => (          
                   (rows = rows.filter(function(Donators){
                       return Donators.current_amount > 5000}))
-          ))}
+          ))
           context.campaigns = rows
           }}>Donations > $5,000
         </bs.Button>
@@ -62,10 +61,10 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-            {Object.values(context.campaigns).map((cam) => (          
+            Object.values(context.campaigns).map(() => (          
                   (rows = rows.filter(function(Donators){
                       return Donators.social_share_total > 500}))
-          ))}
+          ))
           context.campaigns = rows
           }}>Share Count > 500
         </bs.Button>
@@ -75,10 +74,10 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-            {Object.values(context.campaigns).map((cam) => (          
+            Object.values(context.campaigns).map(() => (          
                   (rows = rows.filter(function(Donators){
                       return Donators.campaign_hearts > 200}))
-          ))}
+          ))
           context.campaigns = rows
           }}>Hearts > 200
         </bs.Button>
@@ -88,10 +87,10 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-            {Object.values(context.campaigns).map((cam) => (          
+            Object.values(context.campaigns).map(() => (          
                   (rows = rows.filter(function(Donators){
                       return Donators.days_active > 5}))
-          ))}
+          ))
           context.campaigns = rows
           }}>Days Active > 5
         </bs.Button>
@@ -101,12 +100,11 @@ function Left_container(props) {
       <Link to={`/campaign`}>
         <bs.Button
           onClick = {evt => {
-            {Object.values(context.campaigns).map((cam) => (          
+            Object.values(context.campaigns).map(() => (          
                   (rows = rows.filter(function(Donators){
                       return Donators.goal > 50000}))
-          ))}
+          ))
           context.campaigns = rows
-          context.rows = rows.length
           }}>Goal > $50,000
         </bs.Button>
       </Link>
@@ -116,6 +114,10 @@ function Left_container(props) {
         <bs.Button
           onClick = {evt => {
           context.campaigns = context.cams
+          rows = []
+          for (const p of NAME_PR) {
+              rows.push(p)
+          }
           }}>Refresh Filters
         </bs.Button>
       </Link>

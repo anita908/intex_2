@@ -32,7 +32,7 @@ def main():
     #     dbprod.category = Category.objects.get(title=prod['category'])
 
     #     dbprod.save()
-    with open('campaigns.json') as json_file:
+    with open('campaigns.json', encoding='utf8') as json_file:
         data = json.load(json_file)
 
     campaigns = data["campaigns"]

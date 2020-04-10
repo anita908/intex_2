@@ -10,7 +10,7 @@ function ProductCard(props) {
    const context = React.useContext(AppContext)
    const NAME_AR = Object.values(context.campaigns)
    
-   if(Object.keys(context.campaigns).length > 490)
+   if(Object.keys(context.campaigns).length > 550)
    {
       context.count = 1
    }
