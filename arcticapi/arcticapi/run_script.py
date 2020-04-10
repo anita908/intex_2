@@ -7,33 +7,31 @@ import django
 django.setup()
 
 # regular imports
-from api.models import Category, Product, COVID
+from api.models import COVID
 import json
 
 # main script
 def main():
+    # Category.objects.create(title="Office")
+    # Category.objects.create(title="Clothes")
+    # Category.objects.create(title="Food")
+    # Category.objects.create(title="Household")
+    # Category.objects.create(title="Other")
+    # Category.objects.create(title="Ducks")
 
-    Category.objects.create(title="Office")
-    Category.objects.create(title="Clothes")
-    Category.objects.create(title="Food")
-    Category.objects.create(title="Household")
-    Category.objects.create(title="Other")
-    Category.objects.create(title="Ducks")
+    # with open('products.json') as json_file:
+    #     data = json.load(json_file)
 
-    with open('products.json') as json_file:
-        data = json.load(json_file)
+    # products = data['products']
+    # for prod in products:
+    #     dbprod = Product()
+    #     dbprod.name = prod['name']
+    #     dbprod.filename = prod['filename']
+    #     dbprod.description = prod['description']
+    #     dbprod.price = prod['price']
+    #     dbprod.category = Category.objects.get(title=prod['category'])
 
-    products = data['products']
-    for prod in products:
-        dbprod = Product()
-        dbprod.name = prod['name']
-        dbprod.filename = prod['filename']
-        dbprod.description = prod['description']
-        dbprod.price = prod['price']
-        dbprod.category = Category.objects.get(title=prod['category'])
-
-        dbprod.save()
-
+    #     dbprod.save()
     with open('campaigns.json') as json_file:
         data = json.load(json_file)
 
@@ -55,6 +53,7 @@ def main():
         dbprod.location_city = prod['location_city']
         dbprod.location_country = prod['location_country']
         dbprod.is_charity = prod['is_charity']
+        dbprod.quality = prod['quality']
 
         dbprod.save()
 

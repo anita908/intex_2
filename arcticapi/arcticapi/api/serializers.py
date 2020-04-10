@@ -3,7 +3,6 @@ from rest_framework import serializers
 from api.models import Category
 from api.models import Product
 from api.models import Sale
-from rest_framework import serializers
 from api.models import COVID
 
 # Serializers define the API representation.
@@ -29,4 +28,4 @@ class COVIDSerializer(serializers.ModelSerializer):
     class Meta:
         model = COVID
         fields = [ 'id', 'url', 'current_amount', 'goal', 'donators', 'days_active', 'title', 'description', 'user_first_name', 
-        'user_last_name', 'campaign_image_url', 'campaign_hearts', 'social_share_total', 'location_city', 'location_country', 'is_charity']
+        'user_last_name', 'campaign_image_url', 'campaign_hearts', 'social_share_total', 'location_city', 'location_country', 'is_charity', 'quality']

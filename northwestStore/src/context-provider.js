@@ -7,7 +7,7 @@ import { produce } from 'immer'
 
 /** The context provider for our app */
 export default class AppProvider extends React.Component {
-
+    
     constructor(props) {
         super(props)
         this.actions = {
@@ -24,6 +24,7 @@ export default class AppProvider extends React.Component {
             rows : 0,
             count: 1,
             show: false,
+            cams: {},
         }
     }
 
@@ -36,7 +37,7 @@ export default class AppProvider extends React.Component {
     }
 
     async componentDidMount() {
-        const respc = await axios.get('/api/category/')
+        const respc = await axios.get('http://localhost:8000/api/campaign/')
         // console.log(respc)
         const cats ={}
         for (const c of respc.data) {
@@ -47,7 +48,7 @@ export default class AppProvider extends React.Component {
            categories:cats
         })
 
-        const respp = await axios.get('/api/product/')
+        const respp = await axios.get('http://localhost:8000/api/campaign/')
         // console.log(respp)
         const pros ={}
         for (const p of respp.data) {
@@ -58,15 +59,15 @@ export default class AppProvider extends React.Component {
            products:pros
         })
 
-        const respca = await axios.get('/api/campaign/')
+        const respca = await axios.get('http://localhost:8000/api/campaign/')
         console.log(respca)
-        const cams ={}
+
         for (const p of respca.data) {
-            cams[p.id] = p
+            this.state.cams[p.id] = p
         }
 
         this.setState({
-            campaigns:cams
+            campaigns:this.state.cams
         })
     }
 
