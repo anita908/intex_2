@@ -8,9 +8,18 @@ import * as bs from 'react-bootstrap'
 function ProductDetail(props) {
    const match = useRouteMatch("/campaign/:pid");
    const context = React.useContext(AppContext)
-   const campaign = context.campaigns[match.params.pid]
+   const campaign = context.campaigns[match.params.pid - 1]
    let isCharity = true
-   
+
+   if(Object.keys(context.campaigns).length > 490)
+   {
+      context.count = 1
+   }
+   else
+   {
+      context.count = 0
+   }
+
    if (context.campaigns.is_charity){
       isCharity = "Yes" 
    }
@@ -44,6 +53,8 @@ function ProductDetail(props) {
                <h5>City: {campaign.location_city}</h5>
                <h5>Country: {campaign.location_country}</h5>
                <h5>Is Charity: {isCharity}</h5>
+               <h5>Level of Quality: {campaign.quality}</h5>
+
 
                <p className='mt-5 mr-5'>Description:{campaign.description}</p>
                <center className='mt-5'>

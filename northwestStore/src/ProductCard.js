@@ -9,6 +9,7 @@ function ProductCard(props) {
    const match = useRouteMatch("/campaign/:pid")
    const context = React.useContext(AppContext)
    const NAME_AR = Object.values(context.campaigns)
+   
    if(Object.keys(context.campaigns).length > 490)
    {
       context.count = 1
