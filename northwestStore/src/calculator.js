@@ -3,11 +3,12 @@ import React, { Component } from 'react'
 import * as bs from 'react-bootstrap'
 
 class Calculator extends Component {
-    
+
     constructor(props){
         super(props)
-
         this.state = {
+            showMe: false,
+            response: '',
             auto_fb_post_mode: '',
             percent_acheived: '',
             goal: '',
@@ -72,29 +73,48 @@ class Calculator extends Component {
         })
     }
     handleSubmit = event => {
+      this.setState({
+      showMe: true
+      })
       let req = require("request");
       const uri = "https://cors-anywhere.herokuapp.com/https://ussouthcentral.services.azureml.net/workspaces/57c49b4f4be44691a572d4aa62e7fba4/services/46efc5630b2e430c92e2f09ab66f8f29/execute?api-version=2.0&details=true";
       const apiKey = "cEefYo5ewyLSkbbVPxjAKht49/R3QtyeOk1J2drYvQM8EJMZVcOARxHyDgaAMkBj8qqRYD+pAPDfPF+T98HN9w==";
       let data = {
-          "Inputs": {
-              "input1":
+        "Inputs": {
+          "input1": {
+            "ColumnNames": [
+              "auto_fb_post_mode",
+              "percent_acheived",
+              "goal",
+              "description",
+              "has_beneficiary",
+              "visible_in_search",
+              "campaign_hearts",
+              "is_charity",
+              "charity_valid",
+              "is_anonymous"
+            ],
+            "Values": [
               [
-                  {
-                      'auto_fb_post_mode': this.state.auto_fb_post_mode,
-                      'percent_acheived': this.state.percent_acheived,
-                      'goal': this.state.goal,
-                      'description': this.state.description,
-                      'has_beneficiary': this.state.has_beneficiary,
-                      'visible_in_search': this.state.visible_in_search,
-                      'campaign_hearts': this.state.campaign_hearts,
-                      'is_charity': this.state.is_charity,
-                      'charity_valid': this.state.charity_valid,
-                      'is_anonymous': this.state.is_anonymous,
-                  }
-              ],
-          },
-          "GlobalParameters": {}
+                this.state.auto_fb_post_mode,
+                this.state.percent_acheived,
+                this.state.goal,
+                this.state.description,
+                this.state.has_beneficiary,
+                this.state.visible_in_search,
+                this.state.campaign_hearts,
+                this.state.is_charity,
+                this.state.charity_valid,
+                this.state.is_anonymous,
+      
+              ]
+            ]
+          }
+        },
+        "GlobalParameters": {}
       }
+
+
       const options = {
           uri: uri,
           method: "POST",
@@ -110,6 +130,9 @@ class Calculator extends Component {
           } else {
               console.log("The request failed with status code: " + res.statusCode);
           }
+          this.setState({
+            response: body
+            })
       });
       event.preventDefault()
     }
@@ -125,46 +148,44 @@ class Calculator extends Component {
                         </bs.Col>
                     </bs.Row>
                     <bs.Row className="my-3 mt-3">
-                        <bs.Col md="3">
-                        </bs.Col>
-                        <bs.Col md="6">
+                    <bs.Col md="6">
                             <bs.Card>
                                 <bs.Card.Body style={{marginLeft: "7rem"}} >
                                     <label>Auto facebook post most enabled</label><br />
-                                    <select defaultValue="Select --" value={this.state.auto_fb_post_mode} onChange={this.handleFBChange}>
+                                    <select  value={this.state.auto_fb_post_mode} onChange={this.handleFBChange}>
                                         <option defaultValue>Select --</option>
                                         <option value="1">True</option>
                                         <option value="0">False</option>
                                     </select><br />
-                                    <label>Percent Achieved:</label><br /> <input type="text" placeholder="%" value={this.state.percent_acheived}onChange={this.handleAchieveChange}/><br />
+                                    <label>Percent of Goal Achieved:</label><br /> <input type="text" placeholder="%" value={this.state.percent_acheived}onChange={this.handleAchieveChange}/><br />
                                     <label>Campaign Goal Amount :</label><br /> <input type="text" placeholder="$" value={this.state.goal} onChange={this.handleGoalChange}/><br />
                                     <label>How many campaign hearts?</label><br /> <input type="text" placeholder="#" value={this.state.campaign_hearts} onChange={this.handleHeartChange}/><br />
                                     <label>Is it for charity?</label><br />
-                                    <select defaultValue="Select --" value={this.state.is_charity} onChange={this.handleIsCharityChange}>
+                                    <select  value={this.state.is_charity} onChange={this.handleIsCharityChange}>
                                         <option defaultValue>Select --</option>
                                         <option value="1">True</option>
                                         <option value="0">False</option>
                                     </select><br />
                                     <label>Is the charity validated?</label><br />
-                                    <select defaultValue="Select --" value={this.state.charity_valid} onChange={this.handleCharityValidChange}>
+                                    <select  value={this.state.charity_valid} onChange={this.handleCharityValidChange}>
                                         <option defaultValue>Select --</option>
                                         <option value="1">True</option>
                                         <option value="0">False</option>
                                     </select><br />
                                     <label>Is it anonymous?</label><br />
-                                    <select defaultValue="Select --" value={this.state.is_anonymous} onChange={this.handleIsAnonymousChange}>
+                                    <select  value={this.state.is_anonymous} onChange={this.handleIsAnonymousChange}>
                                         <option defaultValue>Select --</option>
                                         <option value="1">True</option>
                                         <option value="0">False</option>
                                     </select><br />
                                     <label>Is it visible in the search?</label><br />
-                                    <select defaultValue="Select --" value={this.state.visible_in_search} onChange={this.handleVisibleInSearchChange}>
+                                    <select  value={this.state.visible_in_search} onChange={this.handleVisibleInSearchChange}>
                                         <option defaultValue>Select --</option>
                                         <option value="1">True</option>
                                         <option value="0">False</option>
                                     </select><br />
                                     <label>Has beneficiary?</label><br />
-                                    <select defaultValue="Select --" value={this.state.has_beneficiary} onChange={this.handleHasBeneficiaryChange}>
+                                    <select  value={this.state.has_beneficiary} onChange={this.handleHasBeneficiaryChange}>
                                         <option defaultValue>Select --</option>
                                         <option value="1">True</option>
                                         <option value="0">False</option>
@@ -177,7 +198,13 @@ class Calculator extends Component {
                                 </bs.Card.Body>
                             </bs.Card>
                         </bs.Col>
-                        <bs.Col md="3">
+                        <bs.Col md="6">
+                             {this.state.showMe?
+                            <div>
+                                {this.state.response}
+                                </div>:null
+                            }
+
                         </bs.Col>
                     </bs.Row>
                 </bs.Container>
