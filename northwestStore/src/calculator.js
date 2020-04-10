@@ -2,7 +2,7 @@ import './CSS/todo.css'
 import React, { Component } from 'react'
 import * as bs from 'react-bootstrap'
 
-class Checkout extends Component {
+class Calculator extends Component {
     
     constructor(props){
         super(props)
@@ -121,7 +121,7 @@ class Checkout extends Component {
                 <bs.Container fluid>
                     <bs.Row>
                         <bs.Col>
-                            <h1 className="mt-3">Checkout</h1>
+                            <h1 className="mt-3">Prediction Calculator</h1>
                         </bs.Col>
                     </bs.Row>
                     <bs.Row className="my-3 mt-3">
@@ -186,6 +186,6 @@ class Checkout extends Component {
     }
     
 }
-export default Checkout
+export default Calculator
 
 

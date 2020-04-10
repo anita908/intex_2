@@ -23,7 +23,7 @@ function Headcontainer(props) {
           context.campaigns = context.cams
           }}>Home</Link>
             <Link to='/about' className='nav-link'>About</Link>
-            <Link to='/checkout' className='nav-link'>Prediction Calculator</Link>
+            <Link to='/calculator' className='nav-link'>Prediction Calculator</Link>
           </bs.Nav>
           <bs.Nav>
             <bs.NavDropdown title="Welcome" alignRight> 

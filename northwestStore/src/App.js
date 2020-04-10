@@ -10,7 +10,7 @@ import Headcontainer from './head_container';
 import Footer from './footer';
 import ProductDetail from "./ProductDetail"
 import Cart from './cart'
-import Checkout from './checkout'
+import Calculator from './calculator'
 import CheckoutStarter from './checkout-starter'
 import Receipt from './receipt'
 
@@ -48,8 +48,8 @@ function App(props) {
               <Route path="/checkout-starter">
                   <CheckoutStarter />
               </Route>
-              <Route path="/checkout">
-                  <Checkout />
+              <Route path="/calculator">
+                  <Calculator />
               </Route>
               <Route path="/receipt">
                   <Receipt />
