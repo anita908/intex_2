@@ -1,13 +1,13 @@
 import './CSS/todo.css'
 import React from 'react'
 import * as bs from 'react-bootstrap'
-import axios from 'axios'
-import { Formik, Form, Field} from 'formik'
-import { useHistory } from 'react-router-dom'
-import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+// import axios from 'axios'
+import { Formik, Form} from 'formik'
+// import { useHistory } from 'react-router-dom'
+import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 // import { formatNumber } from './util'
-import AppContext from './context'
+// import AppContext from './context'
 
 
 const stripePromise = loadStripe("pk_test_gq4BPhqaP6UxmHhb6DwVeTkq00JErkzWAq");
@@ -24,11 +24,11 @@ export default Checkout
 
 
 const CheckoutController = props => {
-    const context = React.useContext(AppContext)
-    const history = useHistory()
-    const stripe = useStripe()
-    const elements = useElements()
-    const [stripeError, setStripeError] = React.useState(null)
+    // const context = React.useContext(AppContext)
+    // const history = useHistory()
+    // const stripe = useStripe()
+    // const elements = useElements()
+    const [stripeError] = React.useState(null)
 
     return (
         <Formik
@@ -114,21 +114,21 @@ const PaymentForm = props => (
  *   props.type - the type of input (see React Bootstrap Form.Control)
  *   props.placeholder - placeholder text in the input
  */
-const Input = (props) => (
-    <Field name={props.name}>{rProps => (
-        <bs.Form.Group>
-            {props.title &&
-                <bs.Form.Label>{props.title}</bs.Form.Label>
-            }
-            <bs.Form.Control
-                type="text"  // ...rProps.field may override this default
-                disabled={rProps.form.isSubmitting}
-                placeholder={props.placeholder}
-                {...rProps.field}
-            />
-            {rProps.meta.touched && rProps.meta.error &&
-                <div className="text-danger">{rProps.meta.error}</div>
-            }
-        </bs.Form.Group>
-    )}</Field>
-)
+// const Input = (props) => (
+//     <Field name={props.name}>{rProps => (
+//         <bs.Form.Group>
+//             {props.title &&
+//                 <bs.Form.Label>{props.title}</bs.Form.Label>
+//             }
+//             <bs.Form.Control
+//                 type="text"  // ...rProps.field may override this default
+//                 disabled={rProps.form.isSubmitting}
+//                 placeholder={props.placeholder}
+//                 {...rProps.field}
+//             />
+//             {rProps.meta.touched && rProps.meta.error &&
+//                 <div className="text-danger">{rProps.meta.error}</div>
+//             }
+//         </bs.Form.Group>
+//     )}</Field>
+// )
