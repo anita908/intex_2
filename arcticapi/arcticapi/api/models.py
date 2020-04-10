@@ -39,3 +39,4 @@ class COVID(models.Model):
     location_city = models.TextField()
     location_country = models.TextField()
     is_charity = models.BooleanField()
+    quality = models.TextField()

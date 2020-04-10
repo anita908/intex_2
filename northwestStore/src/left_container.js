@@ -41,7 +41,7 @@ function Left_container(props) {
           context.count = 0
           context.campaigns = rows
 
-          }}>Over 50 donators
+          }}>Over 50 Donors
         </bs.Button>
       </Link>
       <br/>
@@ -67,7 +67,7 @@ function Left_container(props) {
                       return Donators.social_share_total > 500}))
           ))}
           context.campaigns = rows
-          }}>Share count > 500
+          }}>Share Count > 500
         </bs.Button>
       </Link>
       <br/>
@@ -112,6 +112,13 @@ function Left_container(props) {
       </Link>
       <br/>
       <br/>
+      <Link to={`/campaign`}>
+        <bs.Button
+          onClick = {evt => {
+          context.campaigns = context.cams
+          }}>Refresh Filters
+        </bs.Button>
+      </Link>
 
 
 

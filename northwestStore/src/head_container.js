@@ -4,10 +4,10 @@ import Logo from './Media/logo.png';
 import { Link } from 'react-router-dom';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-// import AppContext from './context'
+import AppContext from './context'
 
 function Headcontainer(props) {
-  // const context = React.useContext(AppContext)
+  const context = React.useContext(AppContext)
 
    return (
       <bs.Navbar bg="light" expand="lg" >
@@ -19,7 +19,9 @@ function Headcontainer(props) {
         <bs.Navbar.Toggle aria-controls="basic-navbar-nav" />
         <bs.Navbar.Collapse id="basic-navbar-nav">
           <bs.Nav className="mr-auto" >
-            <Link to='/home' className='nav-link'>Home</Link>
+            <Link to='/home' className='nav-link'  onClick = {evt => {
+          context.campaigns = context.cams
+          }}>Home</Link>
             <Link to='/about' className='nav-link'>About</Link>
             <Link to='/checkout' className='nav-link'>Prediction Calculator</Link>
           </bs.Nav>

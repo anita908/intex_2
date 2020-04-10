@@ -16,7 +16,7 @@ function c_footer(props) {
    return (
     <footer>
       <div>
-         <p style={footer}>Go Fund Me © 2020</p>
+         <p style={footer}>GoFundMe © 2020</p>
       </div>
   </footer>
    )
