@@ -37,7 +37,7 @@ export default class AppProvider extends React.Component {
     }
 
     async componentDidMount() {
-        const respc = await axios.get('/api/campaign/')
+        const respc = await axios.get('http://localhost:8000/api/campaign/')
         // console.log(respc)
         const cats ={}
         for (const c of respc.data) {
@@ -48,7 +48,7 @@ export default class AppProvider extends React.Component {
            categories:cats
         })
 
-        const respp = await axios.get('/api/campaign/')
+        const respp = await axios.get('http://localhost:8000/api/campaign/')
         // console.log(respp)
         const pros ={}
         for (const p of respp.data) {
@@ -59,7 +59,7 @@ export default class AppProvider extends React.Component {
            products:pros
         })
 
-        const respca = await axios.get('/api/campaign/')
+        const respca = await axios.get('http://localhost:8000/api/campaign/')
         console.log(respca)
 
         for (const p of respca.data) {

@@ -1,7 +1,6 @@
 import './CSS/todo.css'
 import React, { Component } from 'react'
 import * as bs from 'react-bootstrap'
-import $ from 'jquery'; 
 
 class Checkout extends Component {
     
@@ -19,6 +18,7 @@ class Checkout extends Component {
             is_charity: '',
             charity_valid: '',
             is_anonymous: '',
+            output: '',
         }
     }
     handleFBChange = event => {
@@ -72,28 +72,50 @@ class Checkout extends Component {
         })
     }
     handleSubmit = event => {
-        alert(`${this.state.auto_fb_post_mode} ${this.state.campaign_hearts} ${this.state.description}`)
-        event.preventDefault()
+      let req = require("request");
+      const uri = "https://cors-anywhere.herokuapp.com/https://ussouthcentral.services.azureml.net/workspaces/57c49b4f4be44691a572d4aa62e7fba4/services/46efc5630b2e430c92e2f09ab66f8f29/execute?api-version=2.0&details=true";
+      const apiKey = "cEefYo5ewyLSkbbVPxjAKht49/R3QtyeOk1J2drYvQM8EJMZVcOARxHyDgaAMkBj8qqRYD+pAPDfPF+T98HN9w==";
+      let data = {
+          "Inputs": {
+              "input1":
+              [
+                  {
+                      'auto_fb_post_mode': this.state.auto_fb_post_mode,
+                      'percent_acheived': this.state.percent_acheived,
+                      'goal': this.state.goal,
+                      'description': this.state.description,
+                      'has_beneficiary': this.state.has_beneficiary,
+                      'visible_in_search': this.state.visible_in_search,
+                      'campaign_hearts': this.state.campaign_hearts,
+                      'is_charity': this.state.is_charity,
+                      'charity_valid': this.state.charity_valid,
+                      'is_anonymous': this.state.is_anonymous,
+                  }
+              ],
+          },
+          "GlobalParameters": {}
+      }
+      const options = {
+          uri: uri,
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + apiKey,
+          },
+          body: JSON.stringify(data)
+      }
+      req(options, (err, res, body) => {
+          if (!err && res.statusCode == 200) {
+              console.log(body);
+          } else {
+              console.log("The request failed with status code: " + res.statusCode);
+          }
+      });
+      event.preventDefault()
     }
 
 
     render(){
-      var settings = {
-      "url": "https://ussouthcentral.services.azureml.net/workspaces/57c49b4f4be44691a572d4aa62e7fba4/services/15ecd22158f24951b310ab323f5928d6/execute?api-version=2.0&details=true",
-      "method": "POST",
-      "timeout": 0,
-      "headers": {
-      "Content-Type": ["application/json", "application/json"],
-      "Authorization": "Bearer qgpNRi1Y3sZHGPFJtJSCOX4mfp3vfydGfMCWeZ+UOR6XIyMKb7mHxEQQBIPqKAT4EC1CPkfOwFKUM33Wv9p9pg=="
-      },
-      "data": JSON.stringify({"Inputs":{"input1":{"ColumnNames":["auto_fb_post_mode","percent_acheived","goal","description","has_beneficiary","visible_in_search","campaign_hearts","is_charity","charity_valid","is_anonymous"],
-      "Values":[[this.state.auto_fb_post_mode,this.state.percent_acheived,this.state.goal,this.state.description,this.state.has_beneficiary,this.state.visible_in_search,this.state.campaign_hearts,this.state.is_charity,this.state.charity_valid,this.state.is_anonymous]]}},"GlobalParameters":{}}),
-      };
-      $.ajax(settings).done(function (response) {
-      console.log("!!!!!!!!!!"); 
-      console.log(response);
-      });
-        
         return (
             <form onSubmit={this.handleSubmit}>
                 <bs.Container fluid>
@@ -150,7 +172,8 @@ class Checkout extends Component {
                                     <label>Write the description of your campaign below:</label><br />
                                     <textarea style={{width: "255px", height: "100px", borderRadius: "5px"}} value={this.state.description} onChange={this.handleDescriptionChange}></textarea>
                                     <br /><br />
-                                    <input type="submit" value="Submit" style={{marginLeft: "7rem"}}/>
+                                    <input type="submit" value="Submit" style={{marginLeft: "7rem"}} onChange={this.handleSubmit}/>
+                                    <br /><br />
                                 </bs.Card.Body>
                             </bs.Card>
                         </bs.Col>
