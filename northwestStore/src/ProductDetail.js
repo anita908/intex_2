@@ -6,13 +6,7 @@ import * as bs from 'react-bootstrap'
 
 
 function ProductDetail(props) {
-<<<<<<< HEAD
-   const match = useRouteMatch("/product/:pid");
-   const [img_idx, setImgIdx] = React.useState("1")
-   const context = React.useContext(AppContext)
-   const product = context.products[match.params.pid]
-   const history = useHistory()
-=======
+
    const match = useRouteMatch("/campaign/:pid");
    const context = React.useContext(AppContext)
    const campaign = context.campaigns[match.params.pid - 1]
@@ -34,7 +28,6 @@ function ProductDetail(props) {
    else{
       isCharity = "No" 
    }
->>>>>>> ce3d41f7724ccbe38cfbd4f976fef55158d64b5f
 
 
    if (!product){
