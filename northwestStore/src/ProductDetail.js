@@ -11,7 +11,7 @@ function ProductDetail(props) {
    const campaign = context.campaigns[match.params.pid - 1]
    let isCharity = true
 
-   if(Object.keys(context.campaigns).length > 490)
+   if(Object.keys(context.campaigns).length > 550)
    {
       context.count = 1
    }
