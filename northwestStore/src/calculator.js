@@ -70,33 +70,33 @@ class Calculator extends Component {
       showMe: true
       })
       let req = require("request");
-      const uri = "https://ussouthcentral.services.azureml.net/workspaces/57c49b4f4be44691a572d4aa62e7fba4/services/5ad594d087f94cfab381b00270c3a2db/execute?api-version=2.0&details=true";
-      const apiKey = "CWRlfLrYfwVD6Bb5Knt4Csn52ZBWxUWz0xCZf83UyfJRb7N5+etuUx4SNSehnIxwGbTVzpBD3LBzyUgapoaYag==";
+      const uri = "https://cors-anywhere.herokuapp.com/https://ussouthcentral.services.azureml.net/workspaces/57c49b4f4be44691a572d4aa62e7fba4/services/60929b260da84d08b6f41ac720a2d76a/execute?api-version=2.0&details=true";
+      const apiKey = "jMgLKnjjHFID4/YfKeqPzd5CP2qR3z2M7GcB9idvyERWXiNWdHmWEIVx97VI/LT2Olv/T1zLEW6Fd76tJVNhNA==";
       let data = {
         "Inputs": {
           "input1": {
             "ColumnNames": [
-              "Rating",
-              "Chain Owned?",
-              "Number of Dyalysis Stations",
-              "Offers in Center Hemodialysis?",
-              "Offers Peritoneal Dialysis?",
-              "Offers Home Hemodyalysis Training?",
-              "Patient Transfusion Category",
-              "Mortality Rate",
-              "Percentage Of Adult Patients With Long Term Cateter In Use",
+              "Five Star",
+              "Chain Owned",
+              "# of Dialysis Stations",
+              "Offers in-center hemodialysis",
+              "Offers peritoneal dialysis",
+              "Offers home hemodialysis training",
+              "Patient Transfusion category text",
+              "Mortality Rate (Facility)",
+              "Percentage of Adult patients with long term catheter in use"
             ],
             "Values": [
               [
+                // "3",
+                // "1",
+                // "1",
                 // "0",
+                // "1",
                 // "0",
-                // "0",
-                // "hjkl",
-                // "0",
-                // "0",
-                // "2",
-                // "0",
-                // "0",
+                // "As Expected",
+                // "5",
+                // "10"
                 this.state.fiveStarRating,
                 this.state.chainOwned,
                 this.state.numberOfDialysisStations,
@@ -123,17 +123,18 @@ class Calculator extends Component {
           },
           body: JSON.stringify(data)
       }
-    //   req(options, (err, res, body) => {
-    //       if (!err && res.statusCode == 200) {
-    //           console.log(body);
-    //       } else {
-    //           console.log("The request failed with status code: " + res.statusCode);
-    //       }
-    //       this.setState({
-    //         response: body
-    //         })
-    //   });
-    console.log(data)
+      req(options, (err, res, body) => {
+          if (!err && res.statusCode == 200) {
+              console.log(body);
+          } else {
+            console.log(body)
+
+            //   console.log("The request failed with status code: " + res.statusCode);
+          }
+          this.setState({
+            response: body
+            })
+      });
       event.preventDefault()
     }
 

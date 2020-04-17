@@ -26,9 +26,9 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "react-select": "^3.1.0",
+    "request": "^2.88.2",
     "sass": "^1.25.0",
-    "typescript": "^3.7.5",
-    "request": "*"
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",
