@@ -21,50 +21,54 @@ class Calculator extends Component {
     }
     handleFBChange = event => {
         this.setState({
-            fiveStarRating: event.target.value
+            auto_fb_post_mode: event.target.value
         })
     }
     handleAchieveChange = event => {
         this.setState({
-            chainOwned: event.target.value
+            percent_acheived: event.target.value
         })
     }
     handleGoalChange = event => {
         this.setState({
-            numberOfDialysisStations: event.target.value
+            goal: event.target.value
         })
     }
     handleHeartChange = event => {
         this.setState({
-            offersInCenterHemodialysis: event.target.value
+            campaign_hearts: event.target.value
         })
     }
     handleIsCharityChange = event => {
         this.setState({
-            offersPeritonealDialysis: event.target.value
+            is_charity: event.target.value
         })
     }
     handleCharityValidChange = event => {
         this.setState({
-            offersHomeHemodyalysis: event.target.value
+            charity_valid: event.target.value
         })
     }
     handleIsAnonymousChange = event => {
         this.setState({
-            patientTransfusionCategoryText: event.target.value
+            is_anonymous: event.target.value
         })
     }
     handleHasBeneficiaryChange = event => {
         this.setState({
-            percentageOfAdultPatientsWithLongTermCateterInUse: event.target.value
+            has_beneficiary: event.target.value
+        })
+    }
+    handleDescriptionChange = event => {
+        this.setState({
+            description: event.target.value
         })
     }
     handleVisibleInSearchChange = event => {
         this.setState({
-            mortalityRate: event.target.value
+            visible_in_search: event.target.value
         })
     }
-
     handleSubmit = event => {
       this.setState({
       showMe: true
@@ -88,15 +92,6 @@ class Calculator extends Component {
             ],
             "Values": [
               [
-                // "0",
-                // "0",
-                // "0",
-                // "hjkl",
-                // "0",
-                // "0",
-                // "2",
-                // "0",
-                // "0",
                 this.state.fiveStarRating,
                 this.state.chainOwned,
                 this.state.numberOfDialysisStations,
@@ -123,17 +118,16 @@ class Calculator extends Component {
           },
           body: JSON.stringify(data)
       }
-    //   req(options, (err, res, body) => {
-    //       if (!err && res.statusCode == 200) {
-    //           console.log(body);
-    //       } else {
-    //           console.log("The request failed with status code: " + res.statusCode);
-    //       }
-    //       this.setState({
-    //         response: body
-    //         })
-    //   });
-    console.log(data)
+      req(options, (err, res, body) => {
+          if (!err && res.statusCode == 200) {
+              console.log(body);
+          } else {
+              console.log("The request failed with status code: " + res.statusCode);
+          }
+          this.setState({
+            response: body
+            })
+      });
       event.preventDefault()
     }
 
