@@ -8,104 +8,105 @@ class Calculator extends Component {
         super(props)
         this.state = {
             showMe: false,
-            fiveStarRating: '',
-            chainOwned: '',
-            numberOfDialysisStations: '',
-            offersInCenterHemodialysis: '',
-            offersPeritonealDialysis: '',
-            offersHomeHemodyalysis: '',
-            patientTransfusionCategoryText: '',
-            mortalityRate: '',
-            percentageOfAdultPatientsWithLongTermCateterInUse: '',
+            response: '',
+            auto_fb_post_mode: '',
+            percent_acheived: '',
+            goal: '',
+            description: '',
+            has_beneficiary: '',
+            visible_in_search: '',
+            campaign_hearts: '',
+            is_charity: '',
+            charity_valid: '',
+            is_anonymous: '',
+            output: '',
         }
     }
     handleFBChange = event => {
         this.setState({
-            fiveStarRating: event.target.value
+            auto_fb_post_mode: event.target.value
         })
     }
     handleAchieveChange = event => {
         this.setState({
-            chainOwned: event.target.value
+            percent_acheived: event.target.value
         })
     }
     handleGoalChange = event => {
         this.setState({
-            numberOfDialysisStations: event.target.value
+            goal: event.target.value
         })
     }
     handleHeartChange = event => {
         this.setState({
-            offersInCenterHemodialysis: event.target.value
+            campaign_hearts: event.target.value
         })
     }
     handleIsCharityChange = event => {
         this.setState({
-            offersPeritonealDialysis: event.target.value
+            is_charity: event.target.value
         })
     }
     handleCharityValidChange = event => {
         this.setState({
-            offersHomeHemodyalysis: event.target.value
+            charity_valid: event.target.value
         })
     }
     handleIsAnonymousChange = event => {
         this.setState({
-            patientTransfusionCategoryText: event.target.value
+            is_anonymous: event.target.value
         })
     }
     handleHasBeneficiaryChange = event => {
         this.setState({
-            percentageOfAdultPatientsWithLongTermCateterInUse: event.target.value
+            has_beneficiary: event.target.value
+        })
+    }
+    handleDescriptionChange = event => {
+        this.setState({
+            description: event.target.value
         })
     }
     handleVisibleInSearchChange = event => {
         this.setState({
-            mortalityRate: event.target.value
+            visible_in_search: event.target.value
         })
     }
-
     handleSubmit = event => {
       this.setState({
       showMe: true
       })
       let req = require("request");
-      const uri = "https://cors-anywhere.herokuapp.com/https://ussouthcentral.services.azureml.net/workspaces/57c49b4f4be44691a572d4aa62e7fba4/services/60929b260da84d08b6f41ac720a2d76a/execute?api-version=2.0&details=true";
-      const apiKey = "jMgLKnjjHFID4/YfKeqPzd5CP2qR3z2M7GcB9idvyERWXiNWdHmWEIVx97VI/LT2Olv/T1zLEW6Fd76tJVNhNA==";
+      const uri = "https://cors-anywhere.herokuapp.com/https://ussouthcentral.services.azureml.net/workspaces/57c49b4f4be44691a572d4aa62e7fba4/services/46efc5630b2e430c92e2f09ab66f8f29/execute?api-version=2.0&details=true";
+      const apiKey = "cEefYo5ewyLSkbbVPxjAKht49/R3QtyeOk1J2drYvQM8EJMZVcOARxHyDgaAMkBj8qqRYD+pAPDfPF+T98HN9w==";
       let data = {
         "Inputs": {
           "input1": {
             "ColumnNames": [
-              "Five Star",
-              "Chain Owned",
-              "# of Dialysis Stations",
-              "Offers in-center hemodialysis",
-              "Offers peritoneal dialysis",
-              "Offers home hemodialysis training",
-              "Patient Transfusion category text",
-              "Mortality Rate (Facility)",
-              "Percentage of Adult patients with long term catheter in use"
+              "auto_fb_post_mode",
+              "percent_acheived",
+              "goal",
+              "description",
+              "has_beneficiary",
+              "visible_in_search",
+              "campaign_hearts",
+              "is_charity",
+              "charity_valid",
+              "is_anonymous"
             ],
             "Values": [
               [
-                // "3",
-                // "1",
-                // "1",
-                // "0",
-                // "1",
-                // "0",
-                // "As Expected",
-                // "5",
-                // "10"
-                this.state.fiveStarRating,
-                this.state.chainOwned,
-                this.state.numberOfDialysisStations,
-                this.state.offersInCenterHemodialysis,
-                this.state.offersPeritonealDialysis,
-                this.state.offersHomeHemodyalysis,
-                this.state.patientTransfusionCategoryText,
-                this.state.mortalityRate,
-                this.state.percentageOfAdultPatientsWithLongTermCateterInUse,
+                this.state.auto_fb_post_mode,
+                this.state.percent_acheived,
+                this.state.goal,
+                this.state.description,
+                this.state.has_beneficiary,
+                this.state.visible_in_search,
+                this.state.campaign_hearts,
+                this.state.is_charity,
+                this.state.charity_valid,
+                this.state.is_anonymous,
+      
               ]
             ]
           }
@@ -127,9 +128,7 @@ class Calculator extends Component {
           if (!err && res.statusCode == 200) {
               console.log(body);
           } else {
-            console.log(body)
-
-            //   console.log("The request failed with status code: " + res.statusCode);
+              console.log("The request failed with status code: " + res.statusCode);
           }
           this.setState({
             response: body
@@ -152,46 +151,47 @@ class Calculator extends Component {
                     <bs.Col md="6">
                             <bs.Card>
                                 <bs.Card.Body style={{marginLeft: "7rem"}} >
-                                    <label>Rating:</label><br />
-                                    <select  value={this.state.fiveStarRating} onChange={this.handleFBChange}>
-                                        <option defaultValue>Select --</option>
-                                        <option>1 Star</option>
-                                        <option>2 Stars</option>
-                                        <option>3 Stars</option>
-                                        <option>4 Stars</option>
-                                        <option>5 Stars</option>
-                                    </select><br />
-                                    <label>Chain Owned?</label><br /> 
-                                    <select value={this.state.chainOwned}onChange={this.handleAchieveChange}>
-                                        <option defaultValue>Select --</option>
-                                        <option value="1">True</option>
-                                        <option value="0">False</option>
-                                    </select>
-                                    <label>Number of Dialysis Stations:</label><br /> <input type="text" placeholder="#" value={this.state.numberOfDialysisStations} onChange={this.handleGoalChange}/><br />
-                                    <label>Offers In-Center Hemodialysis?</label><br /> 
-                                    <select type="text" placeholder="#" value={this.state.offersInCenterHemodialysis} onChange={this.handleHeartChange}>
-                                        <option defaultValue>Select --</option>
-                                        <option value="1">True</option>
-                                        <option value="0">False</option>
-                                    </select>
-                                    <label>Offers Peritoneal Dialysis?</label><br />
-                                    <select  value={this.state.offersPeritonealDialysis} onChange={this.handleIsCharityChange}>
+                                    <label>Auto facebook post most enabled</label><br />
+                                    <select  value={this.state.auto_fb_post_mode} onChange={this.handleFBChange}>
                                         <option defaultValue>Select --</option>
                                         <option value="1">True</option>
                                         <option value="0">False</option>
                                     </select><br />
-                                    <label>Offers Home Hemodialysis Training?</label><br />
-                                    <select  value={this.state.offersHomeHemodyalysis} onChange={this.handleCharityValidChange}>
+                                    <label>Percent of Goal Achieved:</label><br /> <input type="text" placeholder="%" value={this.state.percent_acheived}onChange={this.handleAchieveChange}/><br />
+                                    <label>Campaign Goal Amount :</label><br /> <input type="text" placeholder="$" value={this.state.goal} onChange={this.handleGoalChange}/><br />
+                                    <label>How many campaign hearts?</label><br /> <input type="text" placeholder="#" value={this.state.campaign_hearts} onChange={this.handleHeartChange}/><br />
+                                    <label>Is it for charity?</label><br />
+                                    <select  value={this.state.is_charity} onChange={this.handleIsCharityChange}>
                                         <option defaultValue>Select --</option>
                                         <option value="1">True</option>
                                         <option value="0">False</option>
                                     </select><br />
-                                    <label>Patient Transfusion Category:</label><br />
-                                    <input type="text" placeholder="Category Name" value={this.state.patientTransfusionCategoryText} onChange={this.handleIsAnonymousChange} /><br />
-                                    <label>Mortality Rate:</label><br />
-                                    <input type="text" placeholder="#" value={this.state.mortalityRate} onChange={this.handleVisibleInSearchChange} /><br />
-                                    <label>Percentage of Adult Patients with Long-Term Catheter in use:</label><br />
-                                    <input type="text" placeholder="%" value={this.state.percentageOfAdultPatientsWithLongTermCateterInUse} onChange={this.handleHasBeneficiaryChange} /><br />
+                                    <label>Is the charity validated?</label><br />
+                                    <select  value={this.state.charity_valid} onChange={this.handleCharityValidChange}>
+                                        <option defaultValue>Select --</option>
+                                        <option value="1">True</option>
+                                        <option value="0">False</option>
+                                    </select><br />
+                                    <label>Is it anonymous?</label><br />
+                                    <select  value={this.state.is_anonymous} onChange={this.handleIsAnonymousChange}>
+                                        <option defaultValue>Select --</option>
+                                        <option value="1">True</option>
+                                        <option value="0">False</option>
+                                    </select><br />
+                                    <label>Is it visible in the search?</label><br />
+                                    <select  value={this.state.visible_in_search} onChange={this.handleVisibleInSearchChange}>
+                                        <option defaultValue>Select --</option>
+                                        <option value="1">True</option>
+                                        <option value="0">False</option>
+                                    </select><br />
+                                    <label>Has beneficiary?</label><br />
+                                    <select  value={this.state.has_beneficiary} onChange={this.handleHasBeneficiaryChange}>
+                                        <option defaultValue>Select --</option>
+                                        <option value="1">True</option>
+                                        <option value="0">False</option>
+                                    </select><br />
+                                    <label>Write the description of your campaign below:</label><br />
+                                    <textarea style={{width: "255px", height: "100px", borderRadius: "5px"}} value={this.state.description} onChange={this.handleDescriptionChange}></textarea>
                                     <br /><br />
                                     <input type="submit" value="Submit" style={{marginLeft: "7rem"}} onChange={this.handleSubmit}/>
                                     <br /><br />
